@@ -2,7 +2,7 @@
 
 原文链接：[linkedin规范](https://github.com/linkedin/swift-style-guide)
 
-确保已阅读：[Apple's API Design Guidelines.](Apple's API Design Guidelines.)
+确保已阅读：[Apple's API Design Guidelines.](https://swift.org/documentation/api-design-guidelines/)
 
 该指南针对于Swift3.0、更新于2017-09-26
 
@@ -332,7 +332,7 @@ for integer in [4, 8, 15, 16, 23, 42] {
 }
 ```
 
-####### 3.1.3 若果可以通过推断得出常量、变量的类型，那就不用显式声明类型方式。
+###### 3.1.3 若果可以通过推断得出常量、变量的类型，那就不用显式声明类型方式。
 
 ###### 3.1.4 若函数返回值有多个，则使用元祖（Tuple）而非`inout`参数返回。
 
@@ -711,24 +711,24 @@ doSomething(1.0, success: { (parameter1) in
 1. 假设函数myFunction应该返回一个字符串，但是，在某些时候它可能会出现错误。 一个常用的方法是让这个函数返回一个可选的String？ 如果出现问题，我们将返回nil。
 
 	```
-func readFile(named filename: String) -> String? {
-    guard let file = openFile(named: filename) else {
+ func readFile(named filename: String) -> String? {
+     guard let file = openFile(named: filename) else {
         return nil
-    }
+     }
 
-    let fileContents = file.read()
-    file.close()
-    return fileContents
-}
-//
-func printSomeFile() {
-    let filename = "somefile.txt"
-    guard let fileContents = readFile(named: filename) else {
+     let fileContents = file.read()
+     file.close()
+     return fileContents
+   }
+ //
+ func printSomeFile() {
+     let filename = "somefile.txt"
+     guard let fileContents = readFile(named: filename) else {
         print("Unable to open file \(filename).")
         return
-    }
-    print(fileContents)
-}
+     }
+     print(fileContents)
+  }
 	```
 
 2. 1的替代方案：适当场景使用Swift的try / catch行为来了解失败的原因。
@@ -760,16 +760,16 @@ func printSomeFile() {
     let fileContents = file.read()
     file.close()
     return fileContents
-  }
+   }
 //
-func printSomeFile() {
-    do {
-        let fileContents = try readFile(named: filename)
-        print(fileContents)
-     } catch {
-        print(error)
-     }
-  }
+   func printSomeFile() {
+     do {
+         let fileContents = try readFile(named: filename)
+         print(fileContents)
+      } catch {
+         print(error)
+      }
+    }
 	```
 	
 > 有一些例外，更倾向于使用方案1而不是方案2。 当结果在语义上可能为nil而不是在检索结果时出错的情况下，返回`optional`值更有意义，而不是使用错误处理。
