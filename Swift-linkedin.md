@@ -4,7 +4,7 @@
 
 确保已阅读：[Apple's API Design Guidelines.](https://swift.org/documentation/api-design-guidelines/)
 
-该指南针对于Swift3.0、更新于2017-09-26
+该指南针对于Swift4.0、更新于2018-02-14
 
 ## 1. 代码格式
 
@@ -163,30 +163,26 @@ class URLFinder {
 
 ```
 
-###### 2.5 所有常量都应该是静态的，独立的。单例除外。所有这些静态常量应按照规则3.1.16放在容器枚举类型中。
-> 1. 该枚举类型容器的命名应是单数。（如`Constant`而非`Constants`）
-> 2. 命名易解读，即通过命名很容易理解它是常量枚举。若不明显，可添加`Constant`后缀。
-> 3. 应使用这些容器对具有相似或相同的前缀，后缀和/或用例的常量进行分组。
+###### 2.5 所有常量都应该是静态的，独立的。所有常量置于class、struct、enum的醒目处，且它们含有众多的常量，应依照相同的前缀、后缀或者用途将所属常量分组。
 
 ```
+// PREFERRED
 class MyClassName {
-    // PREFERRED
-    enum AccessibilityIdentifier {
-        static let pirateButton = "pirate_button"
-    }
-    enum SillyMathConstant {
-        static let indianaPi = 3
-    }
-    static let shared = MyClassName()
-
+    // MARK: - Constants
+	static let buttonPadding: CGFloat = 20.0
+	static let indianaPi = 3
+    
+   static let shared = MyClassName()
+   }
     // 不推荐
-    static let kPirateButtonAccessibilityIdentifier = "pirate_button"
-    enum SillyMath {
-        static let indianaPi = 3
-    }
-    enum Singleton {
-        static let shared = MyClassName()
-    }
+   class MyClassName {
+      // Don't use `k`-prefix
+     static let kButtonPadding: CGFloat = 20.0
+	
+    // Don't namespace constants
+    enum Constant {
+         static let indianaPi = 3	         
+     }	    
 }
 ```
 
@@ -433,7 +429,6 @@ do {
 
 ###### 3.1.15 若函数无参数，无歧义，且有返回值。可以考虑使用计算属性来实现。
 
-###### 3.1.16 为了命名一组静态函数和静态属性，可使用class或struct无case的enum形式。这种方式的优点是不必显式的添加私有 init方法了。
 
 > demo TODO:
 
