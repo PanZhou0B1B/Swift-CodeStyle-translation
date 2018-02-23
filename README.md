@@ -11,4 +11,4 @@
 ## TODO:
 swift raywenderlich 代码规范（译文）
 
-> 原文链接：[linkedin/swift-style-guide](https://github.com/linkedin/swift-style-guide)
+> 原文链接：[raywenderlich/swift-style-guide](https://github.com/raywenderlich/swift-style-guide)
